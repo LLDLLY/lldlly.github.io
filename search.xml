@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>微前端项目总结</title>
+      <link href="2022/01/18/qiankun/"/>
+      <url>2022/01/18/qiankun/</url>
+      
+        <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>又来记笔记了…</p><p>qiankun 官网地址：<a href="https://qiankun.umijs.org/zh/guide">https://qiankun.umijs.org/zh/guide</a></p><h2 id="踩过的坑"><a href="#踩过的坑" class="headerlink" title="踩过的坑"></a>踩过的坑</h2><p>大部分问题，官网上都是有解决方案，乾坤常用问题解决方案地址： <a href="https://qiankun.umijs.org/zh/faq">https://qiankun.umijs.org/zh/faq</a></p><p>主要记录一下部署的时候遇到的问题；</p><ol><li>主应用和子应用部署在不同服务器的情况，需要主应用配置代理，或者子应用的 ningx 配置设置一下 add_header，前端访问地址和api请求都需要设置一下</li></ol><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">localhost /&#123;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">    add_header Access-Control-Allow-Origin &#x27;https://XXXXXX&#x27;;</span><br><span class="line"><span class="meta">#</span><span class="bash"> Credentials 网站访问地址不需要，api请求需要</span></span><br><span class="line">add_header Access-Control-Allow-Credentials &#x27;true&#x27;;    </span><br><span class="line">add_header Access-Control-Allow-Methods &#x27;GET, POST, OPTIONS&#x27;;</span><br><span class="line">add_header Access-Control-Allow-Headers &#x27;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization&#x27;;</span><br><span class="line"></span><br><span class="line">if ($request_method = &#x27;OPTIONS&#x27;) &#123;</span><br><span class="line">return 204;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li>线上环境在子应用页面刷新浏览器之后，页面空白无法加载子应用，且回退到主应用也无法加载主应用页面；</li></ol><p>这个问题当时花了挺长时间的，本地开发环境并不存在这个问题，随便刷新都是可以的，线上子应用刷新就直接白屏，项目文件报404错误，查了很多资料提供的解决方案都是让nginx代理，并没有什么用。最后查出来问题是子应用在打包的时候一定要配置 <code>publicPath</code>，不配置的情况子应用单独部署和访问虽然都是没有问题的，也就是因为单独部署和访问都没问题就导致排查问题的时候一直没往这块想！坑死~</p><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>虽然刚开始的时候举步维艰、遇到了很多问题，但是项目做完之后回来总结却发现，其实并不难，真的就还挺简单的。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 微前端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 微前端 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>create-react-app配置整理</title>
       <link href="2022/01/17/create-react-app2/"/>
       <url>2022/01/17/create-react-app2/</url>
